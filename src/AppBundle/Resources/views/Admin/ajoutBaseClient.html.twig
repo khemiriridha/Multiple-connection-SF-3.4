@@ -1,0 +1,194 @@
+{% extends 'base.html.twig' %}
+{% block title %}Bienvenue Chez Admin ERPOS{% endblock %}  
+
+	{% block body %}    
+		<div class="page-container">
+            <div class="page-sidebar">
+				{% block menu %}
+					{{ render(controller('AppBundle:Configuration:menu', { 'route': app.request.attributes.get('_route') })) }}
+				{% endblock %}  
+            </div>
+			<div class="page-content">
+			    {% block header %}
+					{{ render(controller('AppBundle:Configuration:header')) }}
+				{% endblock %}  
+				{% block nav %}
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a class="active" href="#">Création Base de Données</a></li>
+                </ul>
+				{% endblock %}                                                
+                {% block pagetitle %}
+                <div class="page-title">                    
+                    <h2><span class="fa fa-cogs"></span> Base de données</h2>
+                </div>
+				{% endblock %}              
+                {% block content %}
+                <div class="page-content-wrap">
+				{% for message in app.flashes('error') %}
+					   <div class="alert alert alert-danger" style="font-size:18px;font-style:italic;text-align:center;" role="alert">
+						   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+						   {{ message }}
+					   </div>		
+					</div>
+				{% endfor %} 	
+                   <div class="row">
+                        <div class="col-md-12">
+						{{ form_start(formbd, {'attr': {'class': 'form-horizontal'} }) }}  
+                             
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>Nouveaux Base Donnée</strong> Client</h3>
+                                    
+                                </div>
+                                <div class="panel-body">                                                                        
+                                    <div class="form-group">
+									{{ form_label(formbd.serveur, 'Serveur ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}
+          
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-server"></span></span>
+												 {{ form_widget(formbd.serveur,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    
+                                   
+									<div class="form-group">   
+								    {{ form_label(formbd.bdName, 'Nom de la base données ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}									
+                                        <div class="col-md-6 col-xs-12">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-database"></span></span>
+												{{ form_widget(formbd.bdName,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>            
+                                        </div>
+                                    </div>
+									 <div class="form-group">   
+								    {{ form_label(formbd.login, 'Login ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}									
+                                        <div class="col-md-6 col-xs-12">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-sign-in"></span></span>
+												{{ form_widget(formbd.login,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>            
+                                        </div>
+                                    </div>
+									<div class="form-group">   
+								    {{ form_label(formbd.password, 'Mot de passe ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}									
+                                        <div class="col-md-6 col-xs-12">
+                                            <div class="input-group">
+                                                 <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
+												{{ form_widget(formbd.password,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>            
+                                        </div>
+                                    </div>
+									<hr></hr>
+                                    <div class="form-group">   
+								    {{ form_label(formbd.serveurBdVoip, 'Serveur Base donnée VoIP ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}									
+                                        <div class="col-md-6 col-xs-12">
+                                            <div class="input-group">
+                                                 <span class="input-group-addon"><span class="fa fa-server"></span></span>
+												{{ form_widget(formbd.serveurBdVoip,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>            
+                                        </div>
+                                    </div>
+									<div class="form-group">   
+								    {{ form_label(formbd.bdNameVoip, 'Nom de la Base Donnée VoIP ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}									
+                                        <div class="col-md-6 col-xs-12">
+                                            <div class="input-group">
+                                                 <span class="input-group-addon"><span class="fa fa-database"></span></span>
+												{{ form_widget(formbd.bdNameVoip,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>            
+                                        </div>
+                                    </div>
+									
+									<div class="form-group">   
+								    {{ form_label(formbd.loginVoip, 'Login VoIP ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}									
+                                        <div class="col-md-6 col-xs-12">
+                                            <div class="input-group">
+                                                 <span class="input-group-addon"><span class="fa fa-sign-in"></span></span>
+												{{ form_widget(formbd.loginVoip,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>            
+                                        </div>
+                                    </div>
+									
+									<div class="form-group">   
+								    {{ form_label(formbd.passowrdVoip, 'Mot de passe VoIP', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}									
+                                        <div class="col-md-6 col-xs-12">
+                                            <div class="input-group">
+                                                 <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
+												{{ form_widget(formbd.passowrdVoip,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>            
+                                        </div>
+                                    </div>
+									 <hr></hr>
+              
+                                    <div class="form-group">
+                                         {{ form_label(formbd.tblAdmin, 'Choisir un client', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}									
+                                        <div class="col-md-6 col-xs-12"> 
+											{{ form_widget(formbd.tblAdmin,{ 'attr': {'class': 'form-control select'} }) }}										
+                                             
+                                        </div>
+                                    </div>
+                                    
+                                   <!-- <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">File</label>
+                                        <div class="col-md-6 col-xs-12">                                                                                                                                        
+                                            <input type="file" class="fileinput btn-primary" name="filename" id="filename" title="Browse file"/>
+                                            <span class="help-block">Input type file</span>
+                                        </div>
+                                    </div>-->
+ 
+                                </div>
+								
+                                <div class="panel-footer">
+									{{ form_row(formbd.save, { 'attr': {'class': 'btn btn-primary pull-right'} , 'label': 'Enregistrer' }) }}								
+                                </div>
+                            </div>
+                             {{ form_end(formbd) }}
+                            
+                        </div>
+                    </div>   
+                      
+                    
+                </div>     
+				{% endblock %}
+			</div>
+			
+		</div>	
+		 		
+	{% endblock %}
+	
+{% block javascripts %}
+		
+	    <audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+        <audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+        <audio id="audio-fail" src="{{ asset('audio/fail.mp3') }}" preload="auto"></audio>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-ui.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-migrate.min.js') }}"></script> 
+        <script type='text/javascript' src="{{ asset('js/plugins/icheck/icheck.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>  
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-file-input.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-datepicker.js') }}"></script>                
+ 
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-select.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/tagsinput/jquery.tagsinput.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/form/jquery.form.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/cropper/cropper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/settings.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/actions.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/demo_edit_profile.js') }}"></script>
+	
+		<script>//$(function(){ pageLoadingFrame("show"); });</script> 
+	
+  <script>
+            
+        </script>   
+{% endblock %}
+
+
+
+
+

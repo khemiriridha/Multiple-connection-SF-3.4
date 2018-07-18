@@ -1,0 +1,29 @@
+<ul class="x-navigation x-navigation-horizontal">
+	<li class="xn-logo">
+		<a href="{{ url('system') }}">ERPOS</a>
+		<a href="#" class="x-navigation-control"></a>
+	</li>
+	{% for key,item in menu %}
+	{% set module = key|split('-') %}
+	<li class="xn-openable">
+		<a href="{{ module[2] }}"><span class="fa fa-{{ module[1] }}"></span> <span class="xn-text">{{ module[0] }}</span></a>
+		<ul class="animated zoomIn">
+		{% for link in item %}
+		   {% set href  = link.getHref() %}
+			<li><a href="{{ path(href) }}"><span class="fa fa-{{ link.getClasse() }}"></span> {{ link.getNomRubrique() }}</a></li>
+		{% endfor %}
+		</ul>
+	</li>
+	{% endfor %}   
+<li class="xn-icon-button pull-right last">
+<a href="#" style="width: 100%;"><i class="glyphicon glyphicon-user"></i>{{ app.user.nomComplet }}<span class="fa fa-caret-down"></span></a>  
+<ul class="xn-drop-left animated zoomIn">
+	<li><a href="{{ path('setting') }}"><span class="fa fa-cogs"></span> Paramètre</a></li>
+	<li><a href="#"><span class="fa fa-lock"></span> Lock Screen</a></li>
+	<li><a href="{{ url('logout') }}"   ><span class="fa fa-sign-out"></span> Sign Out</a></li>
+</ul>                        
+</li> 					
+</ul> 
+<ul class="breadcrumb" style="padding: 19px 15px 7px !important;">
+
+</ul>

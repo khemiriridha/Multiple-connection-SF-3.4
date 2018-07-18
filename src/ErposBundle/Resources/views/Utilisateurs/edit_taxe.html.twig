@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+{% block title %}Bienvenue Chez Admin ERPOS{% endblock %}  
+{% block body %} 
+        <div class="page-container page-navigation-top">            
+            <div class="page-content">
+                {{ include('ErposBundle:Parametrage:menu_utilisateur.html.twig', { 'menu': menu,'header_menu': header_menu }) }}
+                <div class="page-title">                    
+                    <h2><span class="fa fa-list-alt"></span> {{ title }}</h2>
+                </div>  
+							
+                <div class="page-content-wrap">                
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+							
+								<!--
+								<div class="btn-group pull-left" style="padding:10px;">
+									<button class="btn btn-danger dropdown-toggle" data-toggle="modal" data-target="#addservice" >
+									<i class="fa fa-plus"></i> Ajouter utilisateur</button>
+								</div> 	-->
+                                     <div class="panel-body panel-body-table">
+
+                                    <div class="table-responsive">
+                                       
+											
+										
+                                               {{ form_start(form_add_taxe, {'attr': {'class': 'form-horizontal'} }) }}  
+                        <div class="panel-body">                                                                        
+                                    <div class="form-group">
+									{{ form_label(form_add_taxe.titre, 'Titre de la Taxe', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}
+          
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group" style="width: 216px;">
+                                                 
+												 {{ form_widget(form_add_taxe.titre,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>                                            
+                                        </div>
+                                    </div>
+									<div class="form-group">
+									{{ form_label(form_add_taxe.type, 'Type de la taxe ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}
+          
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group" style="width: 216px;">
+                                                 
+												 {{ form_widget(form_add_taxe.type,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>                                            
+                                        </div>
+                                    </div>
+									
+									<div class="form-group">
+									{{ form_label(form_add_taxe.inclure, 'Inclure à ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}
+          
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group" style="width: 216px;">
+                                                 
+												 {{ form_widget(form_add_taxe.inclure,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>                                            
+                                        </div>
+                                    </div>
+									
+									<div class="form-group">
+									{{ form_label(form_add_taxe.valeur, 'valeur ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}
+          
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group" style="width: 216px;">
+                                                 
+												 {{ form_widget(form_add_taxe.valeur,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>                                            
+                                        </div>
+                                    </div>
+									
+									
+									
+									<div class="panel-footer">
+									  {{ form_row(form_add_taxe.save, { 'attr': {'class': 'btn btn-primary pull-right'} , 'label': 'Enregistrer' }) }}								
+                                    </div>
+									
+                        </div>
+                                    
+
+                   {{ form_end(form_add_taxe) }}	
+                                            
+                                    </div>                                
+									<div class="row">
+										<div class="col-md-12">
+											<div class="pagination pagination-sm pull-right push-down-10 push-up-10"> </div>                          
+										</div>
+								  </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>              
+            </div>            
+        </div>
+		
+		
+       <div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-times"></span> Supprimer <strong>service</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Êtes-vous sûr de vouloir supprimer ce service?</p>                    
+                        <p>Appuyez sur Oui si vous êtes sûr.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a class="btn btn-success btn-lg mb-control-yes">Oui</a>
+                            <a class="btn btn-default btn-lg mb-control-close">Non</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="modal fade" id="addservice" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content" style="margin: 186px -56px 0 -76px;">
+				
+					<div class="modal-body">
+					   <div class="panel panel-default">
+					   
+					            <div class="panel-heading">
+								    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h3 class="panel-title"><strong></strong>  </h3>
+                                    
+                                </div>
+								
+						
+					</div>
+					<p></p>
+					</div>
+					<!--<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>-->
+				</div>
+			</div>
+		</div>
+{% endblock %}
+
+{% block javascripts %}
+   <audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+        <audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+        <audio id="audio-fail" src="{{ asset('audio/fail.mp3') }}" preload="auto"></audio>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-ui.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-migrate.min.js') }}"></script> 
+        <script type='text/javascript' src="{{ asset('js/plugins/icheck/icheck.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>  
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-file-input.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-datepicker.js') }}"></script>                
+		<script type="text/javascript" src="{{ asset('js/demo_tables.js') }}"></script>    
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-select.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/tagsinput/jquery.tagsinput.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/form/jquery.form.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/cropper/cropper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/settings.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/actions.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/demo_edit_profile.js') }}"></script>
+		<script>$(function(){ pageLoadingFrame("show"); });</script> 
+		<script>
+		/*function delete_row(row){
+			var box = $("#mb-remove-row");
+			box.addClass("open");
+			alert(row);
+			 var route = Routing.generate('remove_service', {
+				'id': row 
+			 }); 
+			$('.mb-control-yes').attr('href',route);
+		}*/
+	</script>
+{% endblock %}

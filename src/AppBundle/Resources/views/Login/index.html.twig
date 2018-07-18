@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block title %}Bienvenue Chez Admin ERPOS{% endblock %}  
+{% block body %}    
+        <div class="login-container">
+            <div class="login-box animated fadeInDown">
+                <div class="login-logo"></div>
+				
+                <div class="login-body">
+                    <div class="login-title">Bienvenue Chez <strong> ERPOS </strong>
+					
+					
+					</div>
+					{% if error %}
+					<div style="padding:1px 17px 7px 17px;color:#ff0000;font-size:15px;font-style:italic;">
+						<strong>
+						{{ error.messageKey|trans(error.messageData, 'security') }}
+						</strong>
+					</div>
+					{% endif %}
+                    <form  id="validate" class="form-horizontal" action="{{ path('login') }}" method="post">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="text" id="username" name="_username"  class="validate[required] form-control" placeholder="Login"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="password" class="validate[required] form-control" id="password" name="_password"  placeholder="Mot de passe"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <a href="#" class="btn btn-link btn-block">Mot de passe oublié ?</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-info btn-block" type="submit">Valider</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="login-footer">
+                    <div class="pull-left">
+                        &copy; 2018 Erpos
+                    </div>
+                    <div class="pull-right">
+                        <a href="#">About</a> |
+                        <a href="#">Privacy</a> |
+                        <a href="#">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('js/plugins/validationengine/languages/jquery.validationEngine-fr.js') }}"></script>
+<script type='text/javascript' src="{{ asset('js/plugins/validationengine/jquery.validationEngine.js') }}"></script>  
+<script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/actions.js') }}"></script>
+{% endblock %}
+
+
+
+
+

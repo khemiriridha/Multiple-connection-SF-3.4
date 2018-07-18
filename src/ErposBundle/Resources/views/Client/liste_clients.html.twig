@@ -1,0 +1,263 @@
+{% extends 'base.html.twig' %}
+{% block title %}Bienvenue Chez Admin ERPOS{% endblock %}  
+{% block stylesheets %}
+ <style>
+	.row { margin-top: 10px !important; }
+ </style>
+{% endblock %} 
+{% block body %} 
+        <div class="page-container page-navigation-top">            
+            <div class="page-content">
+                {{ include('ErposBundle:Parametrage:menu_utilisateur.html.twig', { 'menu': menu,'header_menu': header_menu }) }}
+                <div class="page-title">                    
+                    <h2><span class="fa fa-users"></span> {{ title }}</h2>
+                </div>  
+							
+                <div class="page-content-wrap">                
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="{% if(recherche) %}panel panel-default {% else %} panel panel-default panel-toggled {% endif %}">
+							 <div class="panel-heading">
+                                    <h3 class="panel-title">Recherche avancée</h3>
+                                    <ul class="panel-controls">
+                                        <li><a href="#" class="panel-collapse" ><span class="fa fa-angle-down"></span></a></li>
+                                    </ul>                                
+                                </div>
+                                <div class="panel-body">
+								 {{ form_start(recherche_form, {'attr': {'class': 'form-horizontal'} }) }} 
+							
+									<div class="row">
+										<div class="col-md-3">
+										  <div class="form-group">
+												{{ form_label(recherche_form.prenom, 'Prénom ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+													<div class="col-md-8">                                            
+												{{ form_widget(recherche_form.prenom,{ 'attr': {'class': 'form-control','placeholder': 'Prénom'} }) }}                                        
+													</div>
+										  </div>
+										</div>
+										<div class="col-md-3">
+										 <div class="form-group">
+												{{ form_label(recherche_form.nom, 'Nom ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+													<div class="col-md-8">                                            
+												{{ form_widget(recherche_form.nom,{ 'attr': {'class': 'form-control','placeholder': 'Nom'} }) }}                                        
+													</div>
+										  </div>
+										</div>
+										<div class="col-md-3">
+										<div class="form-group">
+												{{ form_label(recherche_form.adresse, 'Adresse ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+													<div class="col-md-8">                                            
+												{{ form_widget(recherche_form.adresse,{ 'attr': {'class': 'form-control','placeholder': 'Adresse'} }) }}                                        
+													</div>
+										  </div>
+										</div>
+										<div class="col-md-3">
+										<div class="form-group">
+												{{ form_label(recherche_form.ville, 'Ville ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+													<div class="col-md-8">                                            
+												{{ form_widget(recherche_form.ville,{ 'attr': {'class': 'form-control','placeholder': 'Ville'} }) }}                                        
+													</div>
+										  </div>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="row">
+										<div class="col-md-3">
+										  <div class="form-group">
+												{{ form_label(recherche_form.cp, 'Code Postal ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+													<div class="col-md-8">                                            
+												{{ form_widget(recherche_form.cp,{ 'attr': {'class': 'form-control','placeholder': 'Code Postal'} }) }}                                        
+													</div>
+										  </div>
+										</div>
+										<div class="col-md-3">
+										 <div class="form-group">
+												{{ form_label(recherche_form.pays, 'pays ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+													<div class="col-md-8">                                            
+												{{ form_widget(recherche_form.pays,{ 'attr': {'class': 'form-control','placeholder': 'pays'} }) }}                                        
+													</div>
+										  </div>
+										</div>
+										<div class="col-md-3">
+										<div class="form-group">
+												{{ form_label(recherche_form.mobile, 'Mobile ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+													<div class="col-md-8">                                            
+												{{ form_widget(recherche_form.mobile,{ 'attr': {'class': 'form-control','placeholder': 'mobile'} }) }}                                        
+													</div>
+										  </div>
+										</div>
+										<div class="col-md-3">
+										<div class="form-group">
+												{{ form_label(recherche_form.numtel, 'Numéro tel ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+													<div class="col-md-8">                                            
+												{{ form_widget(recherche_form.numtel,{ 'attr': {'class': 'form-control','placeholder': 'Numéro tel'} }) }}                                        
+													</div>
+										  </div>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="row">
+										<div class="col-md-3">
+										  <div class="form-group">
+												{{ form_label(recherche_form.fax, 'Fax ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+													<div class="col-md-8">                                            
+												{{ form_widget(recherche_form.fax,{ 'attr': {'class': 'form-control','placeholder': 'Fax'} }) }}                                        
+													</div>
+										  </div>
+										</div>
+										<div class="col-md-3">
+										 <div class="form-group">
+												{{ form_label(recherche_form.email, 'Email ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+													<div class="col-md-8">                                            
+												{{ form_widget(recherche_form.email,{ 'attr': {'class': 'form-control','placeholder': 'Email'} }) }}                                        
+													</div>
+										  </div>
+										</div>
+										<div class="col-md-3">
+										<div class="form-group">
+												{{ form_label(recherche_form.nomSociete, 'Societe ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+													<div class="col-md-8">                                            
+												{{ form_widget(recherche_form.nomSociete,{ 'attr': {'class': 'form-control','placeholder': 'Societe'} }) }}                                        
+													</div>
+										  </div>
+										</div>
+										 
+									</div>
+							 		{{ form_row(recherche_form.Recherche, { 'attr': {'class': 'btn btn-success    pull-right'} , 'label': 'Rechercher' }) }}																
+									
+								 {{ form_end(recherche_form) }}	
+                                </div>
+                            </div>
+							 <div class="panel panel-default">
+								<div class="panel-body">
+								  <div class="page-content-wrap">
+										{% if app.flashes('success') is defined %}
+											{% for message in app.flashes('success') %}
+												<div class="alert alert-warning" style="font-size:18px;font-style:italic;text-align:center;" role="alert">
+												<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+												{{ message }}
+												</div>	
+											{% endfor %}
+										{% endif %}			
+									</div>
+									{% if pemission is not empty %}
+									{% if pemission.getAddPermission() is defined and pemission.getAddPermission() == 1  %}
+										<div class="btn-group pull-left" style="padding:10px;">
+											<a class="btn btn-danger dropdown-toggle" href="{{path('ajouter_client')}}">
+											<i class="fa fa-plus"></i> Ajouter un client</a>
+										</div> 
+									{% endif %}									
+									{% endif %}
+									<div class="panel-body panel-body-table">
+									 <div class="table-responsive">
+											<table class="table table-bordered table-striped table-actions">
+												<thead>
+													<tr>
+														<th>Société </th>
+														<th>Adresse</th>
+														<th>Responsable</th>
+														<th>CP </th>
+														<th>Ville</th>
+														<th>Email</th>
+														<th>Tél</th>
+														<th>N° mobile</th>
+														<th>actions</th>
+													</tr>
+												</thead>
+												<tbody>
+												{% for client in Listeclients %}
+                                                <tr id="trow_1">
+                                                    <td class="text-center">{{ client.nomSociete }}</td>
+													<td class="text-center">{{ client.adresse }}</td>
+                                                    <td> {{ client.prenom }}  {{ client.nom }} </td>
+													<td> {{client.cp }} </td>
+													<td> {{client.ville}} </td>
+													<td> {{client.email}} </td>
+													<td> {{client.numtel}} </td>
+													<td> {{client.mobile}} </td>
+													<td>
+													{% if pemission is not empty %}
+														{% if pemission.getEditPermission() is defined and pemission.getEditPermission() == 1  %}
+                                                        <a class="btn btn-default btn-rounded btn-condensed btn-sm" href="{{ path('edit_abonnee', { 'id': client.id }) }}"  ><span class="fa fa-pencil"></span></a>
+                                                        {% endif %}									
+														{% if pemission.getSuppPermission() is defined and pemission.getSuppPermission() == 1  %}
+													   <button class="btn btn-danger btn-rounded btn-condensed btn-sm" onClick="delete_row({{client.id}});"><span class="fa fa-times"></span></button>
+														{% endif %} 
+													{% endif %} 
+												   </td>
+                                                </tr>
+                                             {% endfor %}
+												</tbody>
+											</table>
+										</div>
+										<div class="row">
+										<div class="col-md-12">
+											<div class="pagination pagination-sm pull-right push-down-10 push-up-10">{{ knp_pagination_render(Listeclients) }}</div>                          
+										</div>
+								  </div>
+									</div>
+                                 </div>   
+							</div>
+                        </div>
+                    </div>
+                
+                </div>              
+            </div>            
+        </div>
+		
+		
+       <div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-times"></span> Supprimer <strong>Client</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Êtes-vous sûr de vouloir supprimer ce client?</p>                    
+                        <p>Appuyez sur Oui si vous êtes sûr.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a class="btn btn-success btn-lg mb-control-yes">Oui</a>
+                            <a class="btn btn-default btn-lg mb-control-close">Non</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		 
+{% endblock %}
+
+{% block javascripts %}
+   
+        <audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+        <audio id="audio-fail" src="{{ asset('audio/fail.mp3') }}" preload="auto"></audio>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-ui.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap.min.js') }}"></script>
+        <script type='text/javascript' src="{{ asset('js/plugins/icheck/icheck.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>  
+        <script type="text/javascript" src="{{ asset('js/settings.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/actions.js') }}"></script>
+		<script>
+		$(function(){ 
+		pageLoadingFrame("show");
+		setTimeout(function(){
+			pageLoadingFrame("hide");
+		},200); 
+
+		});
+		</script> 
+		<script>
+ 
+		function delete_row(row){
+
+			var box = $("#mb-remove-row");
+			box.addClass("open");
+			 var route = Routing.generate('remove_abonnee', {
+				'id': row
+			});
+			$('.mb-control-yes').attr('href',route);
+		}
+	</script>
+{% endblock %}

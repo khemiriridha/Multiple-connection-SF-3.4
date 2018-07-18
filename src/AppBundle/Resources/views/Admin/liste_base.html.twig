@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+{% block title %}Bienvenue Chez Admin ERPOS{% endblock %}  
+
+	{% block body %}    
+		<div class="page-container">
+            <div class="page-sidebar">
+				{% block menu %}
+					{{ render(controller('AppBundle:Configuration:menu', { 'route': app.request.attributes.get('_route') })) }}
+				{% endblock %}  
+            </div>
+			<div class="page-content">
+			    {% block header %}
+					{{ render(controller('AppBundle:Configuration:header')) }}
+					
+					
+				{% endblock %}  
+				{% block nav %}
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a class="active" href="#">Liste des Base de Données</a></li>
+                </ul>
+				{% endblock %}                                                
+                {% block pagetitle %}
+                <div class="page-title">                    
+                    <h2><span class="fa fa-database"></span> Base de données</h2>
+                </div>
+				{% endblock %}              
+                {% block content %}
+                <div class="page-content-wrap">
+					
+                  <!-- START RESPONSIVE TABLES -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"></h3>
+                                </div>
+
+                                <div class="panel-body panel-body-table">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-actions">
+                                            <thead>
+                                                <tr>
+                                                    <th width="50">Serveur</th>
+                                                    <th>Login</th>
+                                                    <th width="100">Nom de la base de donnée</th>
+                                                    <th width="100">Mot de passe </th>
+                                                    <th width="100">Serveur VoIP</th>
+                                                    <th width="120">base de donnée VoIP</th>
+													<th width="120">Mot de passe  VoIP</th>
+													<th width="120">Client</th>
+													<th width="120">actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody> 
+											{% for bd in bases %}
+                                                <tr id="trow_1">
+                                                    <td class="text-center">{{bd.serveur}}</td>
+                                                    <td><strong>{{bd.login}}</strong></td>
+                                                    <td>{{bd.bdName}}</td>
+                                                    <td>{{bd.password}}</td>
+                                                    <td>{{bd.serveurBdVoip}}</td>
+													<td>{{bd.bdNameVoip}}</td>
+													<td>{{bd.passowrdVoip}}</td>
+													<td>{{bd.tblAdmin.username}}</td>
+                                                    <td>
+                                                        <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-pencil"></span></button>
+                                                        <button class="btn btn-danger btn-rounded btn-condensed btn-sm" onClick="delete_row('trow_1');"><span class="fa fa-times"></span></button>
+                                                    </td>
+                                                </tr>
+                                             {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>                                
+									<div class="row">
+										<div class="col-md-12">
+											<div class="pagination pagination-sm pull-right push-down-10 push-up-10">{{ knp_pagination_render(bases) }}</div>                          
+										</div>
+								  </div>
+                                </div>
+                            </div>                                                
+
+                        </div>
+                    </div>
+                    <!-- END RESPONSIVE TABLES -->   
+                      
+                    
+                </div>     
+				{% endblock %}
+			</div>
+			
+		</div>	
+		<div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-times"></span> Remove <strong>Data</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to remove this row?</p>                    
+                        <p>Press Yes if you sure.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <button class="btn btn-success btn-lg mb-control-yes">Yes</button>
+                            <button class="btn btn-default btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MESSAGE BOX-->     		
+	{% endblock %}
+	
+{% block javascripts %}
+		<script>
+		//$("html").removeClass("body-full-height");
+		</script>
+	    <audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+        <audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+        <audio id="audio-fail" src="{{ asset('audio/fail.mp3') }}" preload="auto"></audio>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-ui.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-migrate.min.js') }}"></script> 
+        <script type='text/javascript' src="{{ asset('js/plugins/icheck/icheck.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>  
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-file-input.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-datepicker.js') }}"></script>                
+		<script type="text/javascript" src="{{ asset('js/demo_tables.js') }}"></script>    
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-select.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/tagsinput/jquery.tagsinput.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/form/jquery.form.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/cropper/cropper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/settings.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/actions.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/demo_edit_profile.js') }}"></script>
+ 
+{% endblock %}
+
+
+
+
+

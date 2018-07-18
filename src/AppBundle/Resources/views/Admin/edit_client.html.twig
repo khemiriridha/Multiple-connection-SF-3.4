@@ -1,0 +1,318 @@
+{% extends 'base.html.twig' %}
+{% block title %}Bienvenue Chez Admin ERPOS{% endblock %}  
+{% block stylesheets %}
+ <link rel="stylesheet" type="text/css" href="{{ asset('css/cropper/cropper.min.css') }}"/>
+ {% endblock %}
+	{% block body %}    
+		<div class="page-container">
+            <div class="page-sidebar">
+				{% block menu %}
+					{{ render(controller('AppBundle:Configuration:menu', { 'route': app.request.attributes.get('_route') })) }}
+				{% endblock %}  
+            </div>
+			<div class="page-content">
+			    {% block header %}
+					{{ render(controller('AppBundle:Configuration:header')) }}
+				{% endblock %}  
+				{% block nav %}
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Pages</a></li>
+                    <li class="active">Address Book</li>
+                </ul>
+				{% endblock %}                                                
+                {% block pagetitle %}
+                <div class="page-title">                    
+                    <h2><span class="fa fa-cogs"></span> Ajouter un client</h2>
+                </div>
+				{% endblock %}              
+                {% block content %}
+                <div class="page-content-wrap">
+                    
+                      
+                    
+                    <div class="row">    
+                     {{ form_start(clientForm, {'attr': {'class': 'form-horizontal'} }) }}               
+                        <div class="col-md-3 col-sm-4 col-xs-5">
+                            <div class="panel panel-default">                                
+                                <div class="panel-body">
+                                    <h3><span class="fa fa-camera"></span> logo</h3>
+                                   
+                                    <div class="text-center" id="user_image">
+                                        <img src="{{ logo }}" class="img-thumbnail"/>
+                                    </div>                                    
+                                </div>
+                                <div class="panel-body form-group-separated">
+                                    <div class="form-group">                                        
+                                        <div class="col-md-12 col-xs-12">
+                                            <a href="#" class="btn btn-primary btn-block btn-rounded" data-toggle="modal" data-target="#modal_change_photo">Ajouer Logo</a>
+                                        </div>
+                                    </div>
+                                </div>
+								
+                            </div>
+							 <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h3><span class="fa fa-cog"></span> Settings</h3>
+                                </div>
+                                <div class="panel-body form-horizontal form-group-separated">   
+									<div class="form-group">
+									      {{ form_label(clientForm.username, 'Login ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										<div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                                                {{ form_widget(clientForm.username,{ 'attr': {'class': 'form-control'} }) }}
+                                        </div> 
+										  
+                                      </div>
+									  <div class="form-group">
+									      {{ form_label(clientForm.password, 'Password', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										<div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
+                                                {{ form_widget(clientForm.password,{ 'attr': {'class': 'form-control'} }) }}
+                                        </div>  
+										  
+                                       </div>
+                                    </div> 
+                                    </div> 								
+                                    <div class="form-group">
+									  {{ form_label(clientForm.isActive, 'Active', { 'label_attr': {'class': 'col-md-6 col-xs-6 control-label'} }) }}
+                                        
+                                        <div class="col-md-6 col-xs-6">
+                                            <label class="switch">
+											{{ form_widget(clientForm.isActive ) }}
+                                                
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>                                    
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-xs-6 control-label">VoieIp</label>
+                                        <div class="col-md-6 col-xs-6">
+                                            <label class="switch">
+                                                <input type="checkbox"   value="0"/>
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            
+                        </div>
+                        <div class="col-md-9 col-sm-8 col-xs-7">
+
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h3><span class="fa fa-plus"></span> Nouveaux client</h3>
+									 
+                                </div>
+                                <div class="panel-body form-group-separated">
+                                    <div class="form-group">
+									      {{ form_label(clientForm.nomComplet, 'Nom / Prénom client ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.nomComplet,{ 'attr': {'class': 'form-control'} }) }}
+                                        </div>
+                                    </div> 
+									<div class="form-group">
+									      {{ form_label(clientForm.numTel, 'Numéro Télephonique ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.numTel,{ 'attr': {'class': 'form-control'} }) }}
+                                     </div>
+                                    </div> 
+									 <div class="form-group">
+									      {{ form_label(clientForm.mobile, 'Mobile ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.mobile,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 
+									<div class="form-group">
+									      {{ form_label(clientForm.fax, 'Fax ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.fax,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 									
+									<div class="form-group">
+									      {{ form_label(clientForm.email, 'Email ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.email,{ 'attr': {'class': 'form-control'} }) }}
+                                     </div>
+                                    </div>  
+									<div class="form-group">
+									      {{ form_label(clientForm.dateImmatriculationRcs, 'date Immatriculation RCS ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										<div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                               {{ form_widget(clientForm.dateImmatriculationRcs,{ 'attr': {'class': 'form-control datepicker'} }) }}                                          
+                                            </div>
+										</div>
+                                    </div>
+									<div class="form-group">
+									      {{ form_label(clientForm.siret, 'Siret ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.siret,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div>  
+									<div class="form-group">
+									      {{ form_label(clientForm.nTvaIntracommunautaire, 'Numérp Tva Intracommunautaire ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.nTvaIntracommunautaire,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 
+									<div class="form-group">
+									      {{ form_label(clientForm.rs, 'RS ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.rs,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 
+									<div class="form-group">
+									      {{ form_label(clientForm.formeJuridique, 'Forme Juridique ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.formeJuridique,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 
+									<div class="form-group">
+									      {{ form_label(clientForm.capitalSocial, 'Capital Social ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.capitalSocial,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 
+									<div class="form-group">
+									      {{ form_label(clientForm.rcs, 'RCS ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.rcs,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 
+									
+									<div class="form-group">
+									      {{ form_label(clientForm.descActivite, 'Description activité ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.descActivite,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 									
+									<div class="form-group">
+									      {{ form_label(clientForm.adresse, 'Adresse ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.adresse,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 	
+									<div class="form-group">
+									      {{ form_label(clientForm.ville, 'Ville ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.ville,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 
+									<div class="form-group">
+									      {{ form_label(clientForm.cp, 'Code Postal ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.cp,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 
+									<div class="form-group">
+									      {{ form_label(clientForm.pays, 'Pays ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.pays,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 	
+									<div class="form-group">
+									      {{ form_label(clientForm.site, 'Site Web ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.site,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 	
+									<div class="form-group">
+									      {{ form_label(clientForm.voipProvider, 'VoiIp Provider ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+                                        <div class="col-md-9 col-xs-7">
+										  {{ form_widget(clientForm.voipProvider,{ 'attr': {'class': 'form-control'} }) }}
+										</div>
+                                    </div> 									
+                                    <div class="form-group">
+                                        <div class="col-md-12 col-xs-5">
+										{{ form_row(clientForm.save, { 'attr': {'class': 'btn btn-primary btn-rounded pull-right'} , 'label': 'Enregistrer' }) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ form_end(clientForm) }}
+                        </div>
+                        
+                        <div class="col-md-3">
+                           
+                        </div>
+                    </div>
+                </div>
+				{% endblock %}
+			</div>
+			
+		</div>	
+		<div class="modal animated fadeIn" id="modal_change_photo" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+							<h4 class="modal-title" id="smallModalHead">Ajouer Logo</h4>
+						</div>                    
+						 
+						<form id="cp_crop" method="post" action="{{path('ajout_logo')}}">
+							<div class="modal-body">
+							<div class="text-center" id="cp_target">Veuillez ajouter un Logo !!!</div>
+							<input type="hidden" name="cp_img_path" id="cp_img_path"/>
+							<input type="hidden" name="ic_x" id="ic_x"/>
+							<input type="hidden" name="ic_y" id="ic_y"/>
+							<input type="hidden" name="ic_w" id="ic_w"/>
+							<input type="hidden" name="ic_h" id="ic_h"/>                        
+							</div>                    
+						</form>                   
+						 
+						<form id="cp_upload" method="post" enctype="multipart/form-data" action="{{path('view_logo')}}"  >
+                         <div class="modal-body form-horizontal form-group-separated">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">New Photo</label>
+                            <div class="col-md-4">
+                                <input type="file" class="fileinput btn-info" name="file" id="cp_photo" data-filename-placement="inside" title="Select file"/>
+                            </div>                            
+                        </div>                        
+                    </div>
+                    </form>
+						
+						<div class="modal-footer">
+							<button type="button" class="btn btn-success disabled" id="cp_accept">Accepter</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+						</div>
+					</div>
+				</div>
+			</div>		
+	{% endblock %}
+	
+{% block javascripts %}
+		<script>
+		//$("html").removeClass("body-full-height");
+		</script>
+	    <audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+        <audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+        <audio id="audio-fail" src="{{ asset('audio/fail.mp3') }}" preload="auto"></audio>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-ui.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-migrate.min.js') }}"></script> 
+        <script type='text/javascript' src="{{ asset('js/plugins/icheck/icheck.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>  
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-file-input.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-datepicker.js') }}"></script>                
+ 
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-select.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/tagsinput/jquery.tagsinput.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/form/jquery.form.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/cropper/cropper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/settings.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/actions.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/demo_edit_profile.js') }}"></script>
+ 
+{% endblock %}
+
+
+
+
+

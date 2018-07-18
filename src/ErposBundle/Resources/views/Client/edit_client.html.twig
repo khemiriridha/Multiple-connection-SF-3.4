@@ -1,0 +1,236 @@
+{% extends 'base.html.twig' %}
+{% block title %}Bienvenue Chez Admin ERPOS{% endblock %} 
+{% block stylesheets %}
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/cropper/cropper.min.css') }}"/>
+{% endblock %} 
+{% block body %} 
+        <div class="page-container page-navigation-top">            
+            <div class="page-content">
+                {{ include('ErposBundle:Parametrage:menu_utilisateur.html.twig', { 'menu': menu,'header_menu': header_menu }) }}
+                <div class="page-title">                    
+                    <h2><span class="fa fa-plus"></span> {{ title }}</h2>
+                </div>  
+               <!-- PAGE CONTENT WRAPPER -->
+                <div class="page-content-wrap">
+                
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                            {{ form_start(editForm, {'attr': {'class': 'form-horizontal'} }) }} 
+                            <div class="panel panel-default">
+                                
+                                <div class="panel-body">
+                                    <p></p>
+                                </div>
+                                <div class="panel-body">                                                                        
+                                    
+                                    <div class="row">
+                                        
+                                        <div class="col-md-6">
+                                           
+                                            <div class="form-group">
+											{{ form_label(editForm.prenom, 'Prénom ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9">                                            
+											{{ form_widget(editForm.prenom,{ 'attr': {'class': 'form-control','placeholder': 'Prénom'} }) }}                                        
+                                                </div>
+                                            </div>
+                                            <div class="form-group">                                        
+                                            {{ form_label(editForm.nom, 'Nom ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.nom,{ 'attr': {'class': 'form-control','placeholder': 'Nom'} }) }}
+                                                </div>
+                                            </div>
+											 <div class="form-group">                                        
+                                            {{ form_label(editForm.fonction, 'Fonction ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.fonction,{ 'attr': {'class': 'form-control','placeholder': 'Fonction'} }) }}
+                                                </div>
+                                            </div>
+										
+											<div class="form-group">                                        
+                                            {{ form_label(editForm.account, 'Account ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.account,{ 'attr': {'class': 'form-control','placeholder': 'Account'} }) }}
+                                                </div>
+                                            </div>
+											 <div class="form-group">
+                                               {{ form_label(editForm.email, 'Email ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">                                            
+                                              {{ form_widget(editForm.email,{ 'attr': {'class': 'form-control','placeholder': 'Email'} }) }}
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">                                        
+                                            {{ form_label(editForm.numtel, 'Numéro Télephone ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.numtel,{ 'attr': {'class': 'form-control','placeholder': 'Numéro Télephone'} }) }}
+                                                </div>
+                                            </div>
+											 <div class="form-group">                                        
+                                            {{ form_label(editForm.mobile, 'Mobile ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.mobile,{ 'attr': {'class': 'form-control','placeholder': 'Mobile'} }) }}
+                                                </div>
+                                            </div>
+											 <div class="form-group">                                        
+                                            {{ form_label(editForm.fax, 'Fax ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.fax,{ 'attr': {'class': 'form-control','placeholder': 'Fax'} }) }}
+                                                </div>
+                                            </div>
+											 <div class="form-group">                                        
+                                            {{ form_label(editForm.adresse, 'Adresse ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.adresse,{ 'attr': {'class': 'form-control','placeholder': 'Adresse'} }) }}
+                                                </div>
+                                            </div>
+											 <div class="form-group">                                        
+                                            {{ form_label(editForm.ville, 'Ville ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.ville,{ 'attr': {'class': 'form-control','placeholder': 'Ville'} }) }}
+                                                </div>
+                                            </div>
+											<div class="form-group">                                        
+                                            {{ form_label(editForm.cp, 'Code Postal ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.cp,{ 'attr': {'class': 'form-control','placeholder': 'Code Postal'} }) }}
+                                                </div>
+                                            </div>
+											<div class="form-group">                                        
+                                            {{ form_label(editForm.pays, 'Pays', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.pays,{ 'attr': {'class': 'form-control','placeholder': 'Pays'} }) }}
+                                                </div>
+                                            </div>
+                                            
+                                           
+                                            
+                                           
+                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">                                        
+                                            {{ form_label(editForm.nomSociete, 'Nom de la Société ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.nomSociete,{ 'attr': {'class': 'form-control','placeholder': 'Nom de la Société'} }) }}
+                                                </div>
+                                            </div>
+											<div class="form-group">                                        
+                                            {{ form_label(editForm.rS, 'RS', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.rS,{ 'attr': {'class': 'form-control','placeholder': 'RS'} }) }}
+                                                </div>
+                                            </div>
+											
+											<div class="form-group">                                        
+                                            {{ form_label(editForm.siret, 'Siret ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.siret,{ 'attr': {'class': 'form-control','placeholder': 'Siret'} }) }}
+                                                </div>
+                                            </div>
+											<div class="form-group">                                        
+                                            {{ form_label(editForm.description, 'Description', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">
+                                            {{ form_widget(editForm.description,{ 'attr': {'class': 'form-control','placeholder': 'Description'} }) }}
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                               {{ form_label(editForm.specialite, 'Spécialité ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">                                            
+                                              {{ form_widget(editForm.specialite,{ 'attr': {'class': 'form-control'} }) }}
+                                                </div>
+                                            </div>
+											
+                                             <div class="form-group">
+                                               {{ form_label(editForm.typeActivite, 'Type d\'activité ', { 'label_attr': {'class': 'col-md-3 control-label'} }) }}
+                                                <div class="col-md-9 col-xs-12">                                            
+                                              {{ form_widget(editForm.typeActivite,{ 'attr': {'class': 'form-control'} }) }}
+                                                </div>
+                                            </div>
+											
+											 <!--
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Tags</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="tagsinput" value="First,Second,Third"/>
+                                                    <span class="help-block">Default textarea field</span>
+                                                </div>
+                                            </div>
+                                            
+                                           <div class="form-group">
+                                                <label class="col-md-3 control-label">Select</label>
+                                                <div class="col-md-9">                                                                                            
+                                                    <select class="form-control select">
+                                                        <option>Option 1</option>
+                                                        <option>Option 2</option>
+                                                        <option>Option 3</option>
+                                                        <option>Option 4</option>
+                                                        <option>Option 5</option>
+                                                    </select>
+                                                    <span class="help-block">Select box example</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Checkbox</label>
+                                                <div class="col-md-9">                                                                                                                                        
+                                                    <label class="check"><input type="checkbox" class="icheckbox" checked="checked"/> Checkbox title</label>
+                                                    <span class="help-block">Checkbox sample, easy to use</span>
+                                                </div>
+                                            </div>
+                                            -->
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>
+                                <div class="panel-footer">
+                                  
+									{{ form_row(editForm.save, { 'attr': {'class': 'btn btn-primary  pull-right'} , 'label': 'Enregistrer' }) }}									
+                             
+                                </div>
+                            </div>
+                          {{ form_end(editForm) }}
+                            
+                        </div>
+                    </div>                    
+                    
+                </div>
+ 
+		 
+			</div>
+			
+		</div>	
+		 
+	{% endblock %}
+	
+{% block javascripts %}
+		
+<audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+<audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+<audio id="audio-fail" src="{{ asset('audio/fail.mp3') }}" preload="auto"></audio>
+<script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-ui.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-migrate.min.js') }}"></script> 
+<script type='text/javascript' src="{{ asset('js/plugins/icheck/icheck.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>  
+<script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-file-input.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-datepicker.js') }}"></script>                
+
+<script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-select.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/plugins/tagsinput/jquery.tagsinput.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/plugins/form/jquery.form.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/plugins/cropper/cropper.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/settings.js') }}"></script>        
+<script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>        
+<script type="text/javascript" src="{{ asset('js/actions.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/demo_edit_profile.js') }}"></script>
+
+ 
+{% endblock %}
+
+
+
+
+

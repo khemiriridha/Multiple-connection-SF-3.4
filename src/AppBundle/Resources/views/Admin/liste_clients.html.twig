@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+{% block title %}Bienvenue Chez Admin ERPOS{% endblock %}  
+{% block stylesheets %}
+<style>
+.loading1 {    
+    background-color: #ffffff  !important;
+    background-image: url("http://loadinggif.com/images/image-selection/3.gif")  !important;
+    background-size: 25px 25px  !important;
+    background-position:right center  !important;
+    background-repeat: no-repeat  !important;
+}
+</style>
+{% endblock %}
+	{% block body %}    
+		<div class="page-container">
+            <div class="page-sidebar">
+				{% block menu %}
+					{{ render(controller('AppBundle:Configuration:menu', { 'route': app.request.attributes.get('_route') })) }}
+				{% endblock %}  
+            </div>
+			<div class="page-content">
+			    {% block header %}
+					{{ render(controller('AppBundle:Configuration:header')) }}
+				{% endblock %}  
+				{% block nav %}
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="active"><a href="#">Liste des Clients </a></li>
+                </ul>
+				{% endblock %}                                                
+                {% block pagetitle %}
+                <div class="page-title">                    
+                    <h2><span class="fa fa-users"></span> Liste des clients  </h2>
+                </div>
+				{% endblock %}              
+                {% block content %}
+                <div class="page-content-wrap">
+				{% for message in app.flashes('success') %}
+				   <div class="alert alert-warning" style="font-size:18px;font-style:italic;text-align:center;" role="alert">
+					   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					   {{ message }}
+				   </div>		
+				</div>
+				  {% endfor %} 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                  <div class="panel-body">
+                                   {{ form_start(clientForm, {'attr': {'class': 'form-horizontal'} }) }} 
+                                        <div class="form-group">
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <span class="fa fa-search"></span>
+                                                    </div>
+													{{ form_widget(clientForm.nomComplet,{ 'attr': {'class': 'form-control','placeholder': 'Trouver client'} }) }}
+                                                    {{ form_widget(clientForm.id) }}
+                                                    <div class="input-group-btn">
+													{{ form_row(clientForm.save, { 'attr': {'class': 'btn btn-primary'} , 'label': 'Search' }) }}
+                                                    </div>
+												
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="{{ path('ajout_client') }}" class="btn btn-success btn-block"><span class="fa fa-plus"></span> Ajouter un client </a>
+                                            </div>
+                                        </div>
+                                    {{ form_end(clientForm) }}                                   
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+					{% for client in Listeclients %}
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-body profile">
+                                    <div class="profile-image">
+                                        <img src="{{ client.logo}}" alt="{{ client.nomComplet}}"/>
+                                    </div>
+                                    <div class="profile-data">
+                                        <div class="profile-data-name">{{ client.nomComplet}}</div>
+                                        <div class="profile-data-title">{{ client.rs}}</div>
+                                    </div>
+                                    <div class="profile-controls">
+                                        <a href="{{ path('edit_client', { 'id': client.id }) }}" class="profile-control-left"><span class="fa fa-edit"></span></a>
+                                        <a href="#" onClick="delete_row({{client.id}});" data-id="{{client.id}}" class="profile-control-right"><span class="fa fa-trash"></span></a>
+                                    </div>
+									{% for bd in bases %}
+										{% if bd.tblAdmin.id == client.id %}
+											<div class="profile-controls">
+												<a href="#" alt="Base Donnée" class="profile-control-right-bd" ><span class="fa fa-database"></span></a>
+											</div>
+										{% endif %}
+									{% endfor %}
+                                </div>                                
+                                <div class="panel-body">                                    
+                                    <div class="contact-info">
+                                        <p><small>Mobile</small><br/>{{ client.mobile}}</p>
+                                        <p><small>Email</small><br/>{{ client.email}}</p>
+                                        <p><small>Address</small><br/>{{ client.adresse}}</p>                                   
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+						{% endfor %}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+						<div class="pagination pagination-sm pull-right push-down-10 push-up-10">{{ knp_pagination_render(Listeclients) }}</div>                          
+                        </div>
+                    </div>
+                </div>
+				{% endblock %}
+			</div>
+			
+		</div>	
+		<div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-times"></span> Supprimer <strong>client</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Êtes-vous sûr de vouloir supprimer ce client?</p>                    
+                        <p>Appuyez sur Oui si vous êtes sûr.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a class="btn btn-success btn-lg mb-control-yes">Oui</a>
+                            <a class="btn btn-default btn-lg mb-control-close">Non</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+			
+	{% endblock %}
+{% block javascripts %}
+
+	<audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+	<audio id="audio-fail" src="{{ asset('audio/fail.mp3') }}" preload="auto"></audio>
+	<script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-ui.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap.min.js') }}"></script>            
+	<script type='text/javascript' src="{{ asset('js/plugins/icheck/icheck.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>
+
+	<script type="text/javascript" src="{{ asset('js/settings.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>        
+	<script type="text/javascript" src="{{ asset('js/actions.js') }}"></script> 
+	<script>//$(function(){ pageLoadingFrame("show"); });</script> 
+	<script>
+		function delete_row(row){
+			var box = $("#mb-remove-row");
+			box.addClass("open");
+			 var route = Routing.generate('remove_client', {
+				'client': row
+			});
+			$('.mb-control-yes').attr('href',route);
+		}
+	</script>	
+	<script>
+	  $(function() {
+	  var route =  Routing.generate('search');
+            $("#tbl_client_nomComplet").autocomplete({
+				source: route ,
+				minLength: 1,
+		        search  : function(){$('#tbl_client_nomComplet').addClass( "loading1" );},
+		        response: function(){$('#tbl_client_nomComplet').removeClass("loading1");},
+				select: function (event, ui) {
+				event.preventDefault();
+				 
+                $("#tbl_client_nomComplet").val(ui.item.label);  
+                $("#tbl_client_id").val(ui.item.value); 
+             }
+	 
+            });
+            
+        }); 
+ 
+</script>
+{% endblock %}
+
+
+
+
+

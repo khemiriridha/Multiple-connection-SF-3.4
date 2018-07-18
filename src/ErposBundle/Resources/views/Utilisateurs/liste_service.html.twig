@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+{% block title %}Bienvenue Chez Admin ERPOS{% endblock %}  
+{% block body %} 
+        <div class="page-container page-navigation-top">            
+            <div class="page-content">
+                {{ include('ErposBundle:Parametrage:menu_utilisateur.html.twig', { 'menu': menu,'header_menu': header_menu }) }}
+                <div class="page-title">                    
+                    <h2><span class="fa fa-list-alt"></span> {{ title }}</h2>
+                </div>  
+							
+                <div class="page-content-wrap">                
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+								  <div class="page-content-wrap">
+										{% if app.flashes('success') is defined %}
+											{% for message in app.flashes('success') %}
+												<div class="alert alert-warning" style="font-size:18px;font-style:italic;text-align:center;" role="alert">
+												<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+												{{ message }}
+												</div>	
+											{% endfor %}
+										{% endif %}			
+									</div>
+									{% if pemission is not empty %}
+										 {% if pemission.getAddPermission() is defined and pemission.getAddPermission() == 1  %}
+										<div class="btn-group pull-left" style="padding:10px;">
+											<button class="btn btn-danger dropdown-toggle" data-toggle="modal" data-target="#addservice" >
+											<i class="fa fa-plus"></i> Ajouter un service</button>
+										</div> 	
+										{% endif %}									
+									{% endif %}
+																	
+                                     <div class="panel-body panel-body-table">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-actions">
+                                            <thead>
+                                                <tr>
+                                                    <th width="50">SERVICE</th>
+                                                    <th>TÂCHES</th>
+													<th width="120">actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody> 
+											{% for service in Listeservices %}
+                                                <tr id="trow_1">
+                                                    <td class="text-center">{{service.getNomService()}}</td>
+                                                    <td> {{service.getCommentaire()}} </td>
+                                                    <td>
+													{% if pemission is not empty %}
+														{% if pemission.getEditPermission() is defined and pemission.getEditPermission() == 1  %}
+                                                        <a class="btn btn-default btn-rounded btn-condensed btn-sm" data-toggle="modal" data-target="#edit{{ service.getId() }}" ><span class="fa fa-pencil"></span></a>
+                                                        {{ render(controller('ErposBundle:Utilisateur:editservice', { 'id' : service.getId() } )) }}
+														{% endif %}	
+														{% if pemission.getSuppPermission() is defined and pemission.getSuppPermission() == 1  %}
+														<button class="btn btn-danger btn-rounded btn-condensed btn-sm" onClick="delete_row({{service.getId()}});"><span class="fa fa-times"></span></button>
+														
+												      {% endif %} 
+													{% endif %} 
+												   </td>
+                                                </tr>
+                                             {% endfor %}
+                                            </tbody>
+                                        </table>
+										
+                                    </div>                                
+									<div class="row">
+										<div class="col-md-12">
+											<div class="pagination pagination-sm pull-right push-down-10 push-up-10">{{ knp_pagination_render(Listeservices) }}</div>                          
+										</div>
+								  </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>              
+            </div>            
+        </div>
+		
+		
+       <div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-times"></span> Supprimer <strong>service</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Êtes-vous sûr de vouloir supprimer ce service?</p>                    
+                        <p>Appuyez sur Oui si vous êtes sûr.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a class="btn btn-success btn-lg mb-control-yes">Oui</a>
+                            <a class="btn btn-default btn-lg mb-control-close">Non</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="modal fade" id="addservice" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title"><i class="fa fa-plus"></i> &nbsp; Ajouter un service</h4>
+					</div>
+					<div class="modal-body">
+					{{ form_start(serviceForm, {'attr': {'class': 'form-horizontal'} }) }}
+					<div class="form-group">
+						  {{ form_label(serviceForm.nom_service, 'Nom service ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+						<div class="col-md-9 col-xs-7">
+						  {{ form_widget(serviceForm.nom_service,{ 'attr': {'class': 'form-control'} }) }}
+						</div>
+					</div> 
+					<div class="form-group">
+						  {{ form_label(serviceForm.commentaire, 'Commentaire ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+						<div class="col-md-9 col-xs-7">
+						  {{ form_widget(serviceForm.commentaire,{ 'attr': {'class': 'form-control'} }) }}
+						</div>
+					</div> 
+					</div>
+					<div class="modal-footer">
+						{{ form_row(serviceForm.save, { 'attr': {'class': 'btn btn-primary'} , 'label': 'Enregistrer' }) }}
+					</div>
+                   {{ form_end(serviceForm) }}	
+				</div>
+			</div>
+		</div>
+{% endblock %}
+
+{% block javascripts %}
+   
+        <audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+        <audio id="audio-fail" src="{{ asset('audio/fail.mp3') }}" preload="auto"></audio>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-ui.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap.min.js') }}"></script>
+        <script type='text/javascript' src="{{ asset('js/plugins/icheck/icheck.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>  
+        <script type="text/javascript" src="{{ asset('js/settings.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/actions.js') }}"></script>
+		<script>$(function(){ 
+		pageLoadingFrame("show");
+		setTimeout(function(){
+                        pageLoadingFrame("hide");
+                    },200); 
+
+		});</script> 
+		<script>
+		function delete_row(row){
+			var box = $("#mb-remove-row");
+			box.addClass("open");
+			 var route = Routing.generate('remove_service', {
+				'service': row
+			});
+			$('.mb-control-yes').attr('href',route);
+		}
+	</script>
+{% endblock %}

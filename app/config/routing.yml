@@ -1,0 +1,176 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"  
+
+support:
+    resource: "@SupportBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+logout:
+    path: /logout
+
+  
+
+admin:
+    path:     /admin
+    defaults: { _controller: AppBundle:Admin:index }
+    
+liste_clients:
+    path:     /admin/liste_clients
+    defaults: { _controller: AppBundle:Admin:clients }
+    
+ajout_client:
+    path:     /admin/ajout_client
+    defaults: { _controller: AppBundle:Admin:ajoutClient }
+    
+ajout_base:
+    path:     /admin/base_data
+    defaults: { _controller: AppBundle:Admin:ajouterBd }
+    
+ajout_logo:
+    path:     /admin/ajout_client/logo
+    defaults: { _controller: AppBundle:Admin:addLogo }
+    methods: POST
+    
+    
+view_logo:
+    path:     /admin/ajout_client/view_logo
+    defaults: { _controller: AppBundle:Admin:view }
+    
+remove_client:
+    path:     /admin/remove_client/{client}
+    defaults: { _controller: AppBundle:Admin:removeclient }
+    options:
+        expose: true
+    
+liste_bases:
+    path:     /admin/liste_bases
+    defaults: { _controller: AppBundle:Admin:listebases }
+
+edit_client:
+    path:     /admin/edit_client/{id}
+    defaults: { _controller: AppBundle:Admin:editclient }    
+
+search:
+    path:     /admin/search
+    defaults: { _controller: AppBundle:Admin:searchClient }  
+    options:
+        expose: true
+
+system:
+    path:     /system
+    defaults: { _controller: ErposBundle:Default:index }
+    
+services:
+    path:     /system/services
+    defaults: { _controller: ErposBundle:Utilisateur:service }
+    
+remove_service:
+    path:     /system/remove_service/{service}
+    defaults: { _controller: ErposBundle:Utilisateur:removeservice }
+    options:
+        expose: true
+        
+service_edit:
+    path:     /system/edit_service/{id}
+    defaults: { _controller: ErposBundle:Utilisateur:editservice }
+    methods:  [POST]
+    
+utilisateurs:
+    path:     /system/utilisateurs
+    defaults: { _controller: ErposBundle:Utilisateur:user }
+    
+ajout_user:
+    path:     /system/utilisateurs/ajout_user
+    defaults: { _controller: ErposBundle:Utilisateur:ajoutUser }
+    
+ajout_logo_user:
+    path:     /system/utilisateurs/logo
+    defaults: { _controller: ErposBundle:Utilisateur:addLogo }
+    methods: POST
+    
+view_logo_user:
+    path:     /system/utilisateurs/view_logo
+    defaults: { _controller: ErposBundle:Utilisateur:view }
+    
+remove_user:
+    path:     /system/remove_user/{user}
+    defaults: { _controller: ErposBundle:Utilisateur:removeutilisateur }
+    options:
+        expose: true
+        
+edit_utilisateur:
+    path:     /system/edit_utilisateur/{user}
+    defaults: { _controller: ErposBundle:Utilisateur:editutilisateur } 
+    
+ajout_groupe:
+    path:     /system/ajout_groupe
+    defaults: { _controller: ErposBundle:Utilisateur:ajoutGroupe } 
+    options:
+        expose: true
+    
+add_groupe:
+    path:     /system/groupe
+    defaults: { _controller: ErposBundle:Utilisateur:addGroupe }
+    methods: POST
+    options:
+        expose: true
+        
+list_groupes:
+    path:     /system/listes_groupes 
+    defaults: { _controller: ErposBundle:Utilisateur:groupes }
+    options:
+        expose: true
+
+edit_groupe:
+    path:     /system/edit_groupe/{groupe}
+    defaults: { _controller: ErposBundle:Utilisateur:editgroupe }
+
+edit_groupe_ajax:
+    path:     /system/editgroupe
+    defaults: { _controller: ErposBundle:Utilisateur:editajaxGroupe }
+    methods: POST
+    options:
+        expose: true  
+
+remove_groupe:
+    path:     /system/remove_groupe/{groupe}
+    defaults: { _controller: ErposBundle:Utilisateur:removegroupe }
+    options:
+        expose: true
+
+Clients:
+    path:     /system/liste_clients
+    defaults: { _controller: ErposBundle:Client:listClient } 
+
+setting:
+    path:     /system/setting
+    defaults: { _controller: ErposBundle:Taxe:setting }    
+
+edit_taxe:
+    path:     /system/edit_taxe/{id}
+    defaults: { _controller: ErposBundle:Taxe:edit_taxe }    
+
+remove_taxe:
+    path:     /system/remove_taxe/{id}
+    defaults: { _controller: ErposBundle:Taxe:remove_taxe }  
+    options:
+        expose: true    
+            
+ajouter_client:
+    path:     /system/ajouter_client
+    defaults: { _controller: ErposBundle:Client:addClient } 
+
+edit_abonnee:
+    path:     /system/edit_abonnee/{id}
+    defaults: { _controller: ErposBundle:Client:editclient }
+
+remove_abonnee:
+    path:     /system/remove_abonnee/{id}
+    defaults: { _controller: ErposBundle:Client:removeabonnee }
+    options:
+        expose: true    

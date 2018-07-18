@@ -1,0 +1,514 @@
+{% extends 'base.html.twig' %}
+{% block title %}Bienvenue Chez Admin ERPOS{% endblock %}  
+{% block body %} 
+        <div class="page-container page-navigation-top">            
+            <div class="page-content">
+                {{ include('ErposBundle:Parametrage:menu_utilisateur.html.twig', { 'menu': menu,'header_menu': header_menu }) }}
+                <div class="page-title">                    
+                    <h2><span class="fa fa-wrench"></span> Mes paramètres</h2>
+                </div>                   
+                              
+									<!-- START CONTENT FRAME -->
+									<div class="content-frame">                                    
+										<!-- START CONTENT FRAME TOP -->
+										<!--	<div class="content-frame-top">                        
+											<div class="page-title">                    
+												<h2><span class="fa fa-inbox"></span> Inbox <small>(3 unread)</small></h2>
+											</div>                                                                                
+											
+											<div class="pull-right">                            
+												<button class="btn btn-default"><span class="fa fa-cogs"></span> Settings</button>
+												<button class="btn btn-default content-frame-left-toggle"><span class="fa fa-bars"></span></button>
+											</div>                        
+										</div>
+									 END CONTENT FRAME TOP -->
+										
+										<!-- START CONTENT FRAME LEFT -->
+										<div class="content-frame-left">
+										
+											<div class="block">
+												<div class="list-group border-bottom">
+													<a href="#" class="list-group-item active" id="societe"  ><span class="fa fa-briefcase"></span> Détails de contact des sociétés </a>
+													<a href="#" class="list-group-item" id="facturation"><span class="fa fa-bar-chart-o"></span> Facturation </a>
+													<a href="#" class="list-group-item" id="compteuser"><span class="fa fa-user"></span> Compte utilisateur</a>
+													<!--<a href="#" class="list-group-item"><span class="fa fa-flag"></span> Flagged</a>
+													<a href="#" class="list-group-item"><span class="fa fa-trash-o"></span> Deleted <span class="badge badge-default">1.4k</span></a>      -->                      
+												</div>                        
+											</div>
+											
+										</div>
+										<!-- END CONTENT FRAME LEFT -->
+										
+										<!-- START CONTENT FRAME BODY -->
+										<div class="content-frame-body">
+											
+											<div class="panel panel-default" style="margin-top: -4%;" id="societe_div" >
+											
+												<div class="panel-body mail">
+													<div class="modal-body">
+					                                    <div class="panel panel-default">
+					   
+															<div class="panel-heading">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h3 class="panel-title"><strong>Détails de la société</strong>  </h3>
+																
+															</div>
+															
+															    <div class="panel-body">                                                                        
+																	
+																</div>
+															{{ form_start(clientForm, {'attr': {'class': 'form-horizontal'} }) }} 
+																   <div class="panel-body form-group-separated">
+																		
+																		<div class="form-group">
+																			  {{ form_label(clientForm.numTel, 'Numéro Télephonique ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.numTel,{ 'attr': {'class': 'form-control'} }) }}
+																		 </div>
+																		</div> 
+																		 <div class="form-group">
+																			  {{ form_label(clientForm.mobile, 'Mobile ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.mobile,{ 'attr': {'class': 'form-control'} }) }}
+																			</div>
+																		</div> 
+																		<div class="form-group">
+																			  {{ form_label(clientForm.fax, 'Fax ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.fax,{ 'attr': {'class': 'form-control'} }) }}
+																			</div>
+																		</div> 									
+																		<div class="form-group">
+																			  {{ form_label(clientForm.email, 'Email ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.email,{ 'attr': {'class': 'form-control'} }) }}
+																		 </div>
+																		</div>  
+																		
+																		<div class="form-group">
+																			  {{ form_label(clientForm.siret, 'Siret ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.siret,{ 'attr': {'class': 'form-control'} }) }}
+																			</div>
+																		</div>  
+																		<div class="form-group">
+																			  {{ form_label(clientForm.nTvaIntracommunautaire, 'Numérp Tva Intracommunautaire ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.nTvaIntracommunautaire,{ 'attr': {'class': 'form-control'} }) }}
+																			</div>
+																		</div> 
+																		
+																		<div class="form-group">
+																			  {{ form_label(clientForm.formeJuridique, 'Forme Juridique ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.formeJuridique,{ 'attr': {'class': 'form-control'} }) }}
+																			</div>
+																		</div> 
+																		<div class="form-group">
+																			  {{ form_label(clientForm.capitalSocial, 'Capital Social ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.capitalSocial,{ 'attr': {'class': 'form-control'} }) }}
+																			</div>
+																		</div> 
+																		<div class="form-group">
+																			  {{ form_label(clientForm.rcs, 'RCS ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.rcs,{ 'attr': {'class': 'form-control'} }) }}
+																			</div>
+																		</div> 
+																		
+																										
+																		<div class="form-group">
+																			  {{ form_label(clientForm.adresse, 'Adresse ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.adresse,{ 'attr': {'class': 'form-control'} }) }}
+																			</div>
+																		</div> 	
+																		<div class="form-group">
+																			  {{ form_label(clientForm.ville, 'Ville ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.ville,{ 'attr': {'class': 'form-control'} }) }}
+																			</div>
+																		</div> 
+																		<div class="form-group">
+																			  {{ form_label(clientForm.cp, 'Code Postal ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.cp,{ 'attr': {'class': 'form-control'} }) }}
+																			</div>
+																		</div> 
+																		<div class="form-group">
+																			  {{ form_label(clientForm.pays, 'Pays ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.pays,{ 'attr': {'class': 'form-control'} }) }}
+																			</div>
+																		</div> 	
+																		<div class="form-group">
+																			  {{ form_label(clientForm.site, 'Site Web ', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(clientForm.site,{ 'attr': {'class': 'form-control'} }) }}
+																			</div>
+																		</div> 	
+																		
+																											
+																		<div class="form-group">
+																			<div class="col-md-12 col-xs-5">
+																			{{ form_row(clientForm.save, { 'attr': {'class': 'btn btn-primary btn-rounded pull-right'} , 'label': 'Enregistrer' }) }}
+																			</div>
+																		</div>
+																		
+																	</div>
+									                        {{ form_end(clientForm) }}
+														</div>
+													</div>
+													
+												</div>
+												<div class="panel-footer">                                
+												
+												</div>                            
+											</div>
+											<div class="panel panel-default" style="margin-top: -4%;display:none"  id="facturation_div">
+											
+												<div class="panel-body mail">
+													<div class="modal-body">
+					                                    <div class="panel panel-default">
+					   
+															<div class="panel-heading">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h3 class="panel-title"><strong>PARAMÈTRES DE FACTURATION</strong>  </h3>
+																
+															</div>
+															
+															    <div class="panel-body">  
+                                                                    																
+																</div>
+																{{ form_start(form_facture, {'attr': {'class': 'form-horizontal'} }) }} 
+																   <div class="panel-body form-group-separated">
+																		
+																		<div class="form-group">
+																			  {{ form_label(form_facture.tva, 'TVA', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(form_facture.tva,{ 'attr': {'class': 'form-control'} }) }}
+																		 </div>
+																		</div>
+                                                                        <div class="form-group">
+																			  {{ form_label(form_facture.note_en_bas, 'Note en bas de page:', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(form_facture.note_en_bas,{ 'attr': {'class': 'form-control'} }) }}
+																		 </div>
+																		</div>
+                                                                        								
+																		<div class="form-group">
+																			<div class="col-md-12 col-xs-5">
+																			{{ form_row(form_facture.save, { 'attr': {'class': 'btn btn-primary btn-rounded pull-right'} , 'label': 'Enregistrer' }) }}
+																			</div>
+																		</div>
+																		
+																	</div>
+									                            {{ form_end(form_facture) }}
+																 
+																<table  class="table table-bordered table-striped table-actions" style="margin: 0% 0% 7% 25%;width: 50%;">
+																    <tr>
+																	    <th>TITRE</th>
+																	    
+																	    <th>TYPE DE LA TAXE</th>
+																	    <th>INCLURE À</th>
+																		<th>VALEUR</th>
+																	    <th>ACTION</th>
+																	</tr>
+																{% for line in taxe %}
+																
+																    <tr>
+																	    <td>{{ line.titre}}</td>
+																	    
+																	    
+																		<td>
+																		    {% if line.type == 'fixe'  %} Valeur fixe {% elseif line.type == 'pourcentage' %}Pourcentage{% endif %}
+																		</td>
+																		<td>{{ line.inclure}}</td>
+																	    <td>{{ line.valeur}} {% if line.type == 'pourcentage' %}%{% endif %}</td>
+																	    <td> 
+																		    <a href="{{ path('edit_taxe', { 'id': line.getId() }) }}"><button class="btn btn-default btn-rounded btn-condensed btn-sm"   ><span class="fa fa-pencil"   ></span></button></a>
+																			<button class="btn btn-danger btn-rounded btn-condensed btn-sm" onclick="delete_row('{{line.getId()}}');"><span class="fa fa-times"></span></button>
+																		</td>
+																	
+																	</tr>
+																
+																{% endfor %}
+																</table>
+									
+														</div>
+													</div>
+													
+												</div>
+												<div class="panel-footer">                                
+												                    <div class="btn-group pull-left" style="padding:10px;">
+																		<button class="btn btn-danger dropdown-toggle" data-toggle="modal" data-target="#addtax" >
+																		<i class="fa fa-plus"></i> Ajouter une nouvelle taxe</button>
+																	</div> 	
+												</div>                            
+											</div>
+											<div class="panel panel-default" style="margin-top: -4%;display:none"  id="compteuser_div">
+											
+												<div class="panel-body mail">
+													<div class="modal-body">
+					                                    <div class="panel panel-default">
+					   
+															<div class="panel-heading">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h3 class="panel-title"><strong>Compte utilisateur</strong>  </h3>
+																
+															</div>
+															
+															    <div class="panel-body">                                                                        
+																</div>
+																{{ form_start(form_user, {'attr': {'class': 'form-horizontal'} }) }} 
+																   <div class="panel-body form-group-separated">
+																		
+																		<div class="form-group">
+																			  {{ form_label(form_user.nomComplet, 'Nom complet', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(form_user.nomComplet,{ 'attr': {'class': 'form-control'} }) }}
+																		 </div>
+																		</div>
+                                                                        <div class="form-group">
+																			  {{ form_label(form_user.logo, 'logo', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																		<div class="col-md-1 col-xs-1">
+																			 	<div class="friend">
+																					<img src="{{ form_user.vars.value.logo }}" class="img-thumbnail"/>
+																				</div>  
+                                                                        </div>
+																		</div>
+                                                                         
+																		<div class="form-group">
+																			  {{ form_label(form_user.username, 'Username', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(form_user.username,{ 'attr': {'class': 'form-control'} }) }}
+																		 </div>
+																		</div> 
+																		<div class="form-group">
+																			  {{ form_label(form_user.password, 'password', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(form_user.password,{ 'attr': {'class': 'form-control'} }) }}
+																		 </div>
+																		</div> 
+																		<div class="form-group">
+																			  {{ form_label(form_user.service, 'service', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(form_user.service,{ 'attr': {'class': 'form-control'} }) }}
+																		 </div>
+																		</div> 
+																		<div class="form-group">
+																			  {{ form_label(form_user.idEquipe, 'idEquipe', { 'label_attr': {'class': 'col-md-3 col-xs-5 control-label'} }) }}
+																			<div class="col-md-9 col-xs-7">
+																			  {{ form_widget(form_user.idEquipe,{ 'attr': {'class': 'form-control'} }) }}
+																		 </div>
+																		</div> 
+																		
+																		
+																											
+																		<div class="form-group">
+																			<div class="col-md-12 col-xs-5">
+																			{{ form_row(form_user.save, { 'attr': {'class': 'btn btn-primary btn-rounded pull-right'} , 'label': 'Enregistrer' }) }}
+																			</div>
+																		</div>
+																		
+																	</div>
+									                            {{ form_end(form_user) }}
+																	
+														</div>
+									
+														</div>
+													</div>
+													
+												</div>
+												<div class="panel-footer">                                
+												
+												</div>                            
+											</div>
+											
+											
+											
+											
+										</div>
+										<!-- END CONTENT FRAME BODY -->
+									</div>
+									<!-- END CONTENT FRAME -->
+                                  
+            </div>            
+        </div>
+		
+		
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-times"></span>  <strong>Supprimer Taxe ?</strong> </div>
+                    <div class="mb-content">
+                        <p>Êtes-vous sûr de vouloir supprimer ce Taxe?</p>                    
+                        <p> Appuyez sur Oui si vous êtes sûr.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a   class="btn btn-success btn-lg mb-control-yes">Yes</a>
+                            <button class="btn btn-default btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+  		<div class="modal fade" id="addtax" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content" style="margin: 186px -56px 0 -76px;">
+				
+					<div class="modal-body">
+					   <div class="panel panel-default">
+					   
+					             <div class="panel-heading">
+								    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h3 class="panel-title"><strong>Ajouter une nouvelle taxe</strong>  </h3>
+                                    
+                                </div>
+					{{ form_start(form_add_taxe, {'attr': {'class': 'form-horizontal'} }) }}  
+                        <div class="panel-body">                                                                        
+                                    <div class="form-group">
+									{{ form_label(form_add_taxe.titre, 'Titre de la Taxe', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}
+          
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group" style="width: 216px;">
+                                                 
+												 {{ form_widget(form_add_taxe.titre,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>                                            
+                                        </div>
+                                    </div>
+									<div class="form-group">
+									{{ form_label(form_add_taxe.type, 'Type de la taxe ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}
+          
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group" style="width: 216px;">
+                                                 
+												 {{ form_widget(form_add_taxe.type,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>                                            
+                                        </div>
+                                    </div>
+									
+									<div class="form-group">
+									{{ form_label(form_add_taxe.inclure, 'Inclure à ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}
+          
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group" style="width: 216px;">
+                                                 
+												 {{ form_widget(form_add_taxe.inclure,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>                                            
+                                        </div>
+                                    </div>
+									
+									<div class="form-group">
+									{{ form_label(form_add_taxe.valeur, 'valeur ', { 'label_attr': {'class': 'col-md-3 col-xs-12 control-label'} }) }}
+          
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group" style="width: 216px;">
+                                                 
+												 {{ form_widget(form_add_taxe.valeur,{ 'attr': {'class': 'form-control'} }) }}
+                                            </div>                                            
+                                        </div>
+                                    </div>
+									
+									
+									
+									<div class="panel-footer">
+									  {{ form_row(form_add_taxe.save, { 'attr': {'class': 'btn btn-primary pull-right'} , 'label': 'Ajouter une nouvelle taxe' }) }}								
+                                    </div>
+									
+                        </div>
+                                    
+
+                   {{ form_end(form_add_taxe) }}					
+					</div>
+					<p></p>
+					</div>
+					<!--<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>-->
+				</div>
+			</div>
+		</div>       
+{% endblock %}
+
+{% block javascripts %}
+        <audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+        <audio id="audio-alert" src="{{ asset('audio/alert.mp3') }}" preload="auto"></audio>
+        <audio id="audio-fail" src="{{ asset('audio/fail.mp3') }}" preload="auto"></audio>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-ui.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-migrate.min.js') }}"></script> 
+        <script type='text/javascript' src="{{ asset('js/plugins/icheck/icheck.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>  
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-file-input.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-datepicker.js') }}"></script>                
+ 
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap-select.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/tagsinput/jquery.tagsinput.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/form/jquery.form.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/cropper/cropper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/settings.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/actions.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/demo_edit_profile.js') }}"></script>
+		<script>$(function(){ pageLoadingFrame("show"); });</script> 
+<script>
+   $( document ).ready(function() {
+          
+		  $("#societe").click(function(){
+		    
+			$("#societe_div").show();
+			$("#facturation_div").hide();
+			$("#compteuser_div").hide();
+			
+			$( "#societe" ).addClass( "active" );
+			$( "#facturation" ).removeClass( "active" );
+			$( "#compteuser" ).removeClass( "active" );
+		  
+		  });
+		  
+          $("#facturation").click(function(){
+		    
+			$("#societe_div").hide();
+			$("#facturation_div").show();
+			$("#compteuser_div").hide();
+			
+			$( "#societe" ).removeClass( "active" );
+			$( "#facturation" ).addClass( "active" );
+			$( "#compteuser" ).removeClass( "active" );
+		  
+		  });
+		  
+          $("#compteuser").click(function(){
+		    
+			$("#societe_div").hide();
+			$("#facturation_div").hide();
+			$("#compteuser_div").show();
+			
+			$( "#societe" ).removeClass( "active" );
+			$( "#facturation" ).removeClass( "active" );
+			$( "#compteuser" ).addClass( "active" );
+		  
+		  });
+          
+   
+   
+   
+   });
+function delete_row(row){
+ 
+			var box = $("#mb-remove-row");
+			box.addClass("open");
+			//alert(row);
+			var route = Routing.generate('remove_taxe', {
+				'id': row 
+			 }); 
+			$('.mb-control-yes').attr('href',route);
+}
+
+</script>
+{% endblock %}

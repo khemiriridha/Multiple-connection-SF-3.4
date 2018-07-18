@@ -1,0 +1,4 @@
+services:
+    AppBundle\Form\Type\TblBdType:
+        arguments: ['@service_container']
+        tags: [form.type]

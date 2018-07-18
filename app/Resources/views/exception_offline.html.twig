@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div class="error-container">
+            <div class="error-code"> {{ exception.statusCode }}</div>
+            <div class="error-text">PAGE NON TROUVÉE</div>
+            <div class="error-subtext">La ressource que vous recherchez est indisponible ou introuvable.</div>
+            <div class="error-actions">                                
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <button class="btn btn-primary btn-block btn-lg" onClick="history.back();">page précedant</button>
+                    </div>
+                </div>                                
+            </div>
+            <div class="error-subtext">Ou vous pouvez utiliser la recherche pour trouver tout ce dont vous avez besoin.</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <input type="text" placeholder="Rechercher..." class="form-control"/>
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary"><span class="fa fa-search"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+{% endblock %}
